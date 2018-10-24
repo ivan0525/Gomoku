@@ -41,8 +41,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.7169776240079124,
-      "y": 0.7169776240079124,
+      "x": 0.24270833333333336,
+      "y": 0.24270833333333336,
       "z": 1
     },
     "_quat": {
@@ -82,7 +82,7 @@
       }
     ],
     "_active": true,
-    "_level": 0,
+    "_level": 1,
     "_components": [
       {
         "__id__": 26
@@ -220,7 +220,7 @@
   {
     "__type__": "cc.Node",
     "_name": "Bg_menu",
-    "_objFlags": 0,
+    "_objFlags": 512,
     "_parent": {
       "__id__": 2
     },
@@ -413,7 +413,7 @@
       "__id__": 24
     },
     "chessPrefab": {
-      "__uuid__": "a48b882d-08a7-42a5-9e98-252aa87e555f"
+      "__uuid__": "1a3698d1-168e-4ee0-92fc-12806ad79529"
     },
     "blackChess": {
       "__uuid__": "67a68ca5-3f66-4fa3-8858-600f7f025c03"
@@ -423,6 +423,7 @@
       "__uuid__": "10ee1908-c7a6-45d0-a009-4b24fdef3bad"
     },
     "touchChess": null,
+    "gameState": "white",
     "_id": "692ltJaJZCL4MyPjiK/q5y"
   },
   {

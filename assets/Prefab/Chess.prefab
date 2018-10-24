@@ -12,7 +12,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Black",
+    "_name": "Chess",
     "_objFlags": 0,
     "_parent": null,
     "_children": [],
@@ -83,7 +83,7 @@
     "_dstBlendFactor": 771,
     "_spriteFrame": null,
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -103,9 +103,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "a48b882d-08a7-42a5-9e98-252aa87e555f"
+      "__uuid__": "1a3698d1-168e-4ee0-92fc-12806ad79529"
     },
-    "fileId": "448RA37RJDaqk9fFEcTr2R",
+    "fileId": "b4mhNyrLtPZ5++AtYr//gu",
     "sync": false
   }
 ]
