@@ -72,6 +72,9 @@ cc.Class({
                 this.chessList.push(newChessNode);
             }
         }
+        // 游戏开局，电脑向棋盘中间下一枚棋子
+        this.chessList[112].getComponent(cc.Sprite).spriteFrame = this.blackChess;
+        this.gameState = 'white';
         // 添加五元组
         // 横向
         for (var y = 0;y < 15;y++) {
@@ -139,7 +142,7 @@ cc.Class({
             for (var j = 0;j < 5;j++) {
                 if (this.chessList[this.fiveGroup[i][j]].getComponent(cc.Sprite).spriteFrame === this.blackChess) {
                     b++;
-                } else if (this.chessList[this.fiveGroup[i][j]].getComponent(cc.Sprite) === this.whiteChess) {
+                } else if (this.chessList[this.fiveGroup[i][j]].getComponent(cc.Sprite).spriteFrame === this.whiteChess) {
                     w++;
                 }
             }
@@ -148,21 +151,21 @@ cc.Class({
                 this.fiveGroupScore[i] = 7;
             } else if (b > 0 && w > 0) { // 五元组中既有黑棋又有白棋
                 this.fiveGroupScore[i] = 0;
-            } else if (b === 1 && w === 0) { // 只有一颗黑棋
-                this.fiveGroupScore[i] = 35;
-            } else if (b === 2 && w === 0) {
-                this.fiveGroupScore[i] = 800;
-            } else if (b === 3 && w === 0) {
-                this.fiveGroupScore[i] = 15000;
-            } else if (b === 4 && w === 0) {
-                this.fiveGroupScore[i] = 800000;
             } else if (b === 0 && w === 1) { // 只有一颗白棋
-                this.fiveGroupScore[i] = 15;
+                this.fiveGroupScore[i] = 35;
             } else if (b === 0 && w === 2) {
-                this.fiveGroupScore[i] = 400;
+                this.fiveGroupScore[i] = 800;
             } else if (b === 0 && w === 3) {
-                this.fiveGroupScore[i] = 1800;
+                this.fiveGroupScore[i] = 15000;
             } else if (b === 0 && w === 4) {
+                this.fiveGroupScore[i] = 800000;
+            } else if (b === 1 && w === 0) { // 只有一颗黑棋
+                this.fiveGroupScore[i] = 15;
+            } else if (b === 2 && w === 0) {
+                this.fiveGroupScore[i] = 400;
+            } else if (b === 3 && w === 0) {
+                this.fiveGroupScore[i] = 1800;
+            } else if (b === 4 && w === 0) {
                 this.fiveGroupScore[i] = 100000;
             }
         }
@@ -206,6 +209,50 @@ cc.Class({
     },
     // 胜负判断
     judgeOver: function () {
+        // 棋子的纵坐标
+        var row = this.touchChess.flag % 15;
+        // 棋子的横坐标
+        var column = parseInt(this.touchChess.flag / 15);
+        // 判断横向
+        var fiveCount = 0;
+        for (var x = 0; x < 15; x++) {
+            if (this.chessList[column*15+x].getComponent(cc.Sprite).spriteFrame === this.touchChess.getComponent(cc.Sprite).spriteFrame) {
+                fiveCount++;
+                if (fiveCount === 5) {
+                    if (this.gameState === 'white') {
+                        this.ResultLabel.string = '你赢了！';
+                        this.OverSprite.node.active = true;
+                    } else {
+                        this.ResultLabel.string = '你输了！';
+                        this.OverSprite.node.active = true;
+                    }
+                    this.gameState = 'gameOver';
+                    return;
+                }
+            } else {
+                fiveCount = 0;
+            }
+        }
+        // 纵向判断
+        fiveCount = 0;
+        for (var y = 0; y < 15; y++) {
+            if (this.chessList[y * 15 + row].getComponent(cc.Sprite).spriteFrame === this.touchChess.getComponent(cc.Sprite).spriteFrame) {
+                fiveCount++;
+                if (fiveCount === 5) {
+                    if (this.gameState === 'white') {
+                        this.ResultLabel.string = '你赢了！';
+                        this.OverSprite.node.active = true;
+                    } else {
+                        this.ResultLabel.string = '你输了！';
+                        this.OverSprite.node.active = true;
+                    }
+                    this.gameState = 'gameOver';
+                    return;
+                }
+            } else {
+                fiveCount = 0;
+            }
+        }
         if (this.gameState === 'white') {
             this.gameState = 'black';
         } else {
