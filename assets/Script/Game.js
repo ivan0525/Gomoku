@@ -210,22 +210,44 @@ cc.Class({
     // 胜负判断
     judgeOver: function () {
         // 棋子的纵坐标
-        var row = this.touchChess.flag % 15;
+        var row = parseInt(this.touchChess.flag / 15);
         // 棋子的横坐标
-        var column = parseInt(this.touchChess.flag / 15);
+        var column = this.touchChess.flag % 15;
         // 判断横向
         var fiveCount = 0;
-        for (var x = 0; x < 15; x++) {
-            if (this.chessList[column*15+x].getComponent(cc.Sprite).spriteFrame === this.touchChess.getComponent(cc.Sprite).spriteFrame) {
+        for (var x = 0;x < 15;x++) { // 如果横向有一枚和刚下下来的棋颜色一样且相邻
+            if (this.chessList[row * 15 + x].getComponent(cc.Sprite).spriteFrame === this.touchChess.getComponent(cc.Sprite).spriteFrame) {
+                fiveCount++; // 则棋数加一
+                if (fiveCount === 5) {
+                    if (this.gameState === 'white') {
+                        this.ResultLabel.string = '你赢了！';
+                        cc.log('你赢了');
+                    } else {
+                        this.ResultLabel.string = '你输了！';
+                        cc.log('你输了');
+                    }
+                    this.OverSprite.node.active = true;
+                    this.gameState = 'gameOver';
+                    return;
+                }
+            } else { // 不满足就将计数器置空
+                fiveCount = 0;
+            }
+        }
+        // 纵向判断
+        fiveCount = 0;
+        for (var y = 0;y < 15;y++) {
+            if (this.chessList[y * 15 + column].getComponent(cc.Sprite).spriteFrame === this.touchChess.getComponent(cc.Sprite).spriteFrame) {
                 fiveCount++;
                 if (fiveCount === 5) {
                     if (this.gameState === 'white') {
                         this.ResultLabel.string = '你赢了！';
-                        this.OverSprite.node.active = true;
+                        cc.log('你赢了');
                     } else {
                         this.ResultLabel.string = '你输了！';
-                        this.OverSprite.node.active = true;
+                        cc.log('你输了');
                     }
+                    this.OverSprite.node.active = true;
                     this.gameState = 'gameOver';
                     return;
                 }
@@ -233,19 +255,49 @@ cc.Class({
                 fiveCount = 0;
             }
         }
-        // 纵向判断
+        // 右斜向上方向判断
         fiveCount = 0;
-        for (var y = 0; y < 15; y++) {
-            if (this.chessList[y * 15 + row].getComponent(cc.Sprite).spriteFrame === this.touchChess.getComponent(cc.Sprite).spriteFrame) {
+        var f = row - column;
+        for (var s = 0;s < 15;s++) {
+            if (f + s < 0 || f + s > 14) {
+                continue;
+            }
+            if (this.chessList[(f + s) * 15 + s].getComponent(cc.Sprite).spriteFrame === this.touchChess.getComponent(cc.Sprite).spriteFrame) {
                 fiveCount++;
                 if (fiveCount === 5) {
                     if (this.gameState === 'white') {
                         this.ResultLabel.string = '你赢了！';
-                        this.OverSprite.node.active = true;
+                        cc.log('你赢了');
                     } else {
                         this.ResultLabel.string = '你输了！';
-                        this.OverSprite.node.active = true;
+                        cc.log('你输了');
                     }
+                    this.OverSprite.node.active = true;
+                    this.gameState = 'gameOver';
+                    return;
+                }
+            } else {
+                fiveCount = 0;
+            }
+        }
+        // 右斜向下方向判断
+        fiveCount = 0;
+        var h = row + column;
+        for (var t = 0;t < 15;t++) {
+            if (h - t < 0 || h - t > 14) {
+                continue;
+            }
+            if (this.chessList[(h - t) * 15 + t].getComponent(cc.Sprite).spriteFrame === this.touchChess.getComponent(cc.Sprite).spriteFrame) {
+                fiveCount++;
+                if (fiveCount === 5) {
+                    if (this.gameState === 'white') {
+                        this.ResultLabel.string = '你赢了！';
+                        cc.log('你赢了');
+                    } else {
+                        this.ResultLabel.string = '你输了！';
+                        cc.log('你输了');
+                    }
+                    this.OverSprite.node.active = true;
                     this.gameState = 'gameOver';
                     return;
                 }

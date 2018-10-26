@@ -41,8 +41,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.24270833333333336,
-      "y": 0.24270833333333336,
+      "x": 0.7336932828197439,
+      "y": 0.7336932828197439,
       "z": 1
     },
     "_quat": {
@@ -220,7 +220,7 @@
   {
     "__type__": "cc.Node",
     "_name": "Bg_menu",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "_parent": {
       "__id__": 2
     },
@@ -424,6 +424,8 @@
     },
     "touchChess": null,
     "gameState": "white",
+    "fiveGroup": [],
+    "fiveGroupScore": [],
     "_id": "692ltJaJZCL4MyPjiK/q5y"
   },
   {
@@ -599,7 +601,7 @@
     },
     "_children": [],
     "_active": true,
-    "_level": 0,
+    "_level": 3,
     "_components": [
       {
         "__id__": 14
@@ -626,7 +628,7 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 0,
+      "x": -5.684341886080802e-14,
       "y": 0,
       "z": 0
     },
@@ -825,7 +827,7 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 103,
+      "x": 102.99999999999994,
       "y": 0,
       "z": 0
     },
@@ -859,7 +861,7 @@
     },
     "_children": [],
     "_active": true,
-    "_level": 0,
+    "_level": 3,
     "_components": [
       {
         "__id__": 20
